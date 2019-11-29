@@ -5,8 +5,11 @@ Final Project for 5242 Advanced Machine Learning
 ## Members
 
 Chirong Zhang cz2533
+
 Zhichao Liu zl2686
+
 Yunxiao Zhao yz3380
+
 Yusang Mao ym2694
 
 ## Tasks
@@ -19,6 +22,6 @@ Try original GAN on SVHN data
 
 Implement WGAN
 - clip
-- gradient penalty
+- gradient penalty wgan-gp
 
 Spectrual Normalization
