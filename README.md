@@ -20,7 +20,7 @@ Change CNN architecture.
 
 Try original GAN on SVHN data
 
-Implement WGAN
+Implement WGAN[Lecture 6](https://www.youtube.com/watch?v=3JP-xuBJsyc&list=PLJV_el3uVTsMq6JEFPW35BCiOQTsoqwNw&index=6)
 - clip
 - gradient penalty wgan-gp
 
