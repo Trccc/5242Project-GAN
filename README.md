@@ -20,4 +20,5 @@ Try original GAN on SVHN data
 Implement WGAN
 - clip
 - gradient penalty
+
 Spectrual Normalization
