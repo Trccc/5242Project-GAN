@@ -14,7 +14,7 @@ Yusang Mao ym2694
 
 ## Tasks
 
-Inception score -- 李宏毅 [Lecture 10](https://www.youtube.com/watch?v=IB_ADssBomk&list=PLJV_el3uVTsMq6JEFPW35BCiOQTsoqwNw&index=10)
+Inception score -- 李宏毅 [Lecture 10](https://www.youtube.com/watch?v=IB_ADssBomk&list=PLJV_el3uVTsMq6JEFPW35BCiOQTsoqwNw&index=10)  
 [Keras Implementation](https://machinelearningmastery.com/how-to-implement-the-inception-score-from-scratch-for-evaluating-generated-images/)
 
 Change CNN architecture.
