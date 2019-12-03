@@ -22,7 +22,6 @@ Change CNN architecture.
 Try original GAN on SVHN data
 
 Implement WGAN[Lecture 6](https://www.youtube.com/watch?v=3JP-xuBJsyc&list=PLJV_el3uVTsMq6JEFPW35BCiOQTsoqwNw&index=6)
-- clip
-- gradient penalty wgan-gp
-
-Spectrual Normalization
+- clip [Keras Implementation](https://github.com/eriklindernoren/Keras-GAN/blob/master/wgan/wgan.py)   
+- gradient penalty wgan-gp [Keras Implementation](https://github.com/eriklindernoren/Keras-GAN/blob/master/wgan_gp/wgan_gp.py)  
+Spectrual Normalization [Keras Implementation](https://github.com/IShengFang/SpectralNormalizationKeras)
