@@ -92,8 +92,8 @@ if __name__ == '__main__':
     
     noise = tf.random.normal([1, 100])
     
-    generator_optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-4, beta_1 = 0.3)
-    discriminator_optimizer = tf.keras.optimizers.Adam(learning_rate =4e-4, beta_1 = 0.3)
+    generator_optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-4, beta_1 = 0.5)
+    discriminator_optimizer = tf.keras.optimizers.Adam(learning_rate =1e-4, beta_1 = 0.5)
 
     
 #     checkpoint_dir = cfg.CHECK_DIR
@@ -149,3 +149,4 @@ if __name__ == '__main__':
                 writer.append_data(image)
             image = imageio.imread(filename)
             writer.append_data(image)
+    print('finish')
