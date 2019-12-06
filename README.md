@@ -44,3 +44,6 @@ Spectrual Normalization [Keras Implementation](https://github.com/IShengFang/Spe
 ## Challenge encountered
 
 momentum 0.5
+
+
+## reference
