@@ -2,8 +2,6 @@
 
 Final Project for 5242 Advanced Machine Learning 
 
-<iframe src="https://giphy.com/embed/PFIzmk1ZeaGxG" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/coding-computing-neural-networks-PFIzmk1ZeaGxG">via GIPHY</a></p>
-
 ## Members
 
 Chirong Zhang cz2533
