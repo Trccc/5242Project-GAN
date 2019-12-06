@@ -1,6 +1,7 @@
 # 5242Project
 
-Final Project for 5242 Advanced Machine Learning 
+Final Project for 5242 Advanced Machine Learning  
+![funny](funny.gif)
 
 ## Members
 
