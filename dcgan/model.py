@@ -2,7 +2,6 @@ import tensorflow as tf
 from tensorflow.keras import layers
 
 
-
 def make_generator_model_mnist():
     model = tf.keras.Sequential()
     model.add(layers.Dense(64, use_bias=False, input_shape=(100,), activation='relu'))

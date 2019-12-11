@@ -5,6 +5,7 @@ import glob
 import imageio
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
 import os
 import PIL
 from tensorflow.keras import layers
@@ -49,6 +50,8 @@ def train_step(images,showloss = False):
         
     
 def train(dataset, epochs, savedir):
+    IS_mean = []
+    IS_std = []
     for epoch in range(epochs):
         start = time.time()
         i = 0
@@ -65,12 +68,29 @@ def train(dataset, epochs, savedir):
                                  seed,savedir)
         
         # Save the model every 15 epochs
-        if (epoch + 1) % 10 == 0:
-            IS(generator, 1000, 100)
+        if (epoch + 1) % 5 == 0:
+            mean, std = IS(generator, 1000, 100)
+            IS_mean.append(mean)
+            IS_std.append(std)
             checkpoint.save(file_prefix = checkpoint_prefix)
         print ('Time for epoch {} is {} sec'.format(epoch + 1, time.time()-start))
-    # Generate after the final epoch
+    # clear outputs
     display.clear_output(wait=True)
+    
+    # save IS score and plot
+    IS_mean = np.array(IS_mean)
+    IS_std = np.array(IS_std)
+    IS_df = pd.DataFrame({'mean':IS_mean, 'mean+std':IS_mean+IS_std, 'mean-std':IS_mean-IS_std, 'std':IS_std})
+    df_path = os.path.join(savedir, 'IS_score.csv')
+    IS_df.to_csv(path_or_buf=df_path, index=False)
+    print('Inception score save complete')
+    path = os.path.join(savedir, 'IS_score_trend.png')
+    fig = plt.figure(figsize=(4,4))
+    plt.plot(IS_df[['mean','mean+std','mean-std']])
+    plt.legend(IS_df[['mean','mean+std','mean-std']].columns, loc='best')
+    plt.savefig(path)
+    
+    # Generate after the final epoch
     generate_and_save_images(generator,
                            epochs,
                            seed,savedir)
