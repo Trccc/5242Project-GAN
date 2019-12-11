@@ -95,7 +95,7 @@ def train(dataset, epochs, savedir):
     df_path = os.path.join(savedir, 'IS_score.csv')
     IS_df.to_csv(path_or_buf=df_path, index=False)
     df_path2 = os.path.join(savedir, 'Loss.csv')
-    IS_df.to_csv(path_or_buf=df_path2, index=False)
+    Loss_df.to_csv(path_or_buf=df_path2, index=False)
     print('Inception score and loss save complete')
     
     path = os.path.join(savedir, 'IS_score_trend.png')
