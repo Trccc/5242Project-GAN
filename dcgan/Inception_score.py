@@ -6,6 +6,7 @@ from numpy.random import shuffle
 from keras.applications.inception_v3 import InceptionV3
 from keras.applications.inception_v3 import preprocess_input
 import tensorflow as tf
+
 def scale_images(images, new_shape):
     images_list = list()
     for image in images:
@@ -20,7 +21,7 @@ def calculate_inception_score(images, n_split=10, eps=1E-16):
     n_part = math.floor(images.shape[0] / n_split)
     for i in range(n_split):
         ix_start, ix_end = i * n_part, (i + 1) * n_part
-        subset = images[ix_start:ix_end]
+        subset = images[int(ix_start):int(ix_end)]
         subset = scale_images(subset, (299, 299, 3))
         subset = subset.astype('float32')
         subset = preprocess_input(subset)
@@ -40,4 +41,5 @@ def IS(model, n_sample, noise_dim):
     predictions = model(new_seed, training=False)
     predictions = (predictions + 1) / 2 * 255
     is_avg, is_std = calculate_inception_score(predictions)
-    print('score is {} ± {}'.format(is_avg, is_std))
+    print('score is {} +- {}'.format(is_avg, is_std))
+    return is_avg, is_std
