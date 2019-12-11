@@ -23,7 +23,7 @@ from Inception_score import *
 
 
 @tf.function
-def train_step(images,showloss = False):
+def train_step(images, showloss = False):
     noise = tf.random.normal([cfg.BATCH_SIZE, cfg.NOISE_DIM])
     
     g_loss = generator_loss
@@ -38,8 +38,8 @@ def train_step(images,showloss = False):
         gen_loss = g_loss(fake_output)
         disc_loss = d_loss(real_output, fake_output)
         
-#         if showloss:
-#             print('gen_loss = %.4f|disc_loss = %.4f'%(gen_loss.numpy(),disc_loss.numpy()))
+        #if showloss:
+            #print('gen_loss = %.4f|disc_loss = %.4f'%(gen_loss.numpy(),disc_loss.numpy()))
 
     gradients_of_generator = gen_tape.gradient(gen_loss, generator.trainable_variables)
     gradients_of_discriminator = disc_tape.gradient(disc_loss, discriminator.trainable_variables)
@@ -47,21 +47,29 @@ def train_step(images,showloss = False):
     generator_optimizer.apply_gradients(zip(gradients_of_generator, generator.trainable_variables))
     discriminator_optimizer.apply_gradients(zip(gradients_of_discriminator, discriminator.trainable_variables))
     
+    return gen_loss, disc_loss
+    
         
     
 def train(dataset, epochs, savedir):
     IS_mean = []
     IS_std = []
+    G_loss = []
+    D_loss = []
     for epoch in range(epochs):
         start = time.time()
         i = 0
         for image_batch in dataset:
             i += 1
             if (i+1) % cfg.SHOW_LOSS ==0:
-                train_step(image_batch,showloss = True)
+                g_loss, d_loss = train_step(image_batch, showloss = True)
+
             else:
-                train_step(image_batch)
-        # Produce images for the GIF as we go
+                g_loss, d_loss = train_step(image_batch)
+        
+        G_loss.append(g_loss)
+        D_loss.append(d_loss)
+        # Produce images for the GIF
         display.clear_output(wait=True)
         generate_and_save_images(generator,
                                  epoch + 1,
@@ -77,24 +85,39 @@ def train(dataset, epochs, savedir):
     # clear outputs
     display.clear_output(wait=True)
     
-    # save IS score and plot
+    # save IS score and Loss plot
     IS_mean = np.array(IS_mean)
     IS_std = np.array(IS_std)
     IS_df = pd.DataFrame({'mean':IS_mean, 'mean+std':IS_mean+IS_std, 'mean-std':IS_mean-IS_std, 'std':IS_std})
+    Loss_df = pd.DataFrame({'Generater':G_loss, 'Discriminator':D_loss})
+    
     df_path = os.path.join(savedir, 'IS_score.csv')
     IS_df.to_csv(path_or_buf=df_path, index=False)
-    print('Inception score save complete')
+    df_path2 = os.path.join(savedir, 'Loss.csv')
+    IS_df.to_csv(path_or_buf=df_path2, index=False)
+    print('Inception score and loss save complete')
+    
     path = os.path.join(savedir, 'IS_score_trend.png')
-    fig = plt.figure(figsize=(4,4))
+    fig = plt.figure(figsize=(6, 6))
     plt.plot(IS_df[['mean','mean+std','mean-std']])
+    plt.title('Inception Scores')
     plt.legend(IS_df[['mean','mean+std','mean-std']].columns, loc='best')
     plt.savefig(path)
+    plt.close('all')
+    
+    path2 = os.path.join(savedir, 'Loss_trend.png')
+    fig2 = plt.figure(figsize=(6, 6))
+    plt.plot(Loss_df)
+    plt.title('Validation Losses')
+    plt.legend(Loss_df.columns, loc='best')
+    plt.savefig(path2)
     
     # Generate after the final epoch
     generate_and_save_images(generator,
                            epochs,
                            seed,savedir)
 
+    
 
 if __name__ == '__main__':
     
