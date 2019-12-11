@@ -89,6 +89,7 @@ def train(dataset, epochs, savedir):
     IS_mean = np.array(IS_mean)
     IS_std = np.array(IS_std)
     IS_df = pd.DataFrame({'mean':IS_mean, 'mean+std':IS_mean+IS_std, 'mean-std':IS_mean-IS_std, 'std':IS_std})
+    IS_df.index = [5 * (x + 1) for x in range(IS_df.shape[0])]
     Loss_df = pd.DataFrame({'Generater':G_loss, 'Discriminator':D_loss})
     
     df_path = os.path.join(savedir, 'IS_score.csv')
@@ -103,7 +104,7 @@ def train(dataset, epochs, savedir):
     plt.title('Inception Scores')
     plt.legend(IS_df[['mean','mean+std','mean-std']].columns, loc='best')
     plt.savefig(path)
-    plt.close('all')
+    #plt.close('all')
     
     path2 = os.path.join(savedir, 'Loss_trend.png')
     fig2 = plt.figure(figsize=(6, 6))
@@ -116,18 +117,20 @@ def train(dataset, epochs, savedir):
     generate_and_save_images(generator,
                            epochs,
                            seed,savedir)
+    
+    
 
     
 
 if __name__ == '__main__':
     
-    if cfg.DATA == 'mnist':
+    if cfg.DATA.lower() == 'mnist':
 
         train_data = get_train_data('mnist')
         generator = make_generator_model_mnist()
         discriminator = make_discriminator_model_mnist()
         
-    elif cfg.DATA == 'svhn':
+    elif cfg.DATA.lower() == 'svhn':
         
         train_data = get_train_data('svhn')
         generator = make_generator_model_svhn()
