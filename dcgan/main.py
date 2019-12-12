@@ -141,7 +141,7 @@ if __name__ == '__main__':
     
     noise = tf.random.normal([1, 100])
     
-    generator_optimizer = tf.keras.optimizers.Adam(learning_rate = 2e-4, beta_1 = 0.5)
+    generator_optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-4, beta_1 = 0.5)
     discriminator_optimizer = tf.keras.optimizers.Adam(learning_rate =1e-4, beta_1 = 0.5)
 
     
