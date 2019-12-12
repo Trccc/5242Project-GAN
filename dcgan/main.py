@@ -59,16 +59,19 @@ def train(dataset, epochs, savedir):
     for epoch in range(epochs):
         start = time.time()
         i = 0
+        g_loss = 0
+        d_loss = 0
         for image_batch in dataset:
             i += 1
             if (i+1) % cfg.SHOW_LOSS ==0:
-                g_loss, d_loss = train_step(image_batch, showloss = True)
-
+                g_tensor, d_tensor = train_step(image_batch, showloss = True)
             else:
-                g_loss, d_loss = train_step(image_batch)
+                g_tensor, d_tensor = train_step(image_batch)
+            g_loss += float(g_tensor.numpy())
+            d_loss += float(d_tensor.numpy())
         
-        G_loss.append(g_loss)
-        D_loss.append(d_loss)
+        G_loss.append(g_loss / i)
+        D_loss.append(d_loss / i)
         # Produce images for the GIF
         display.clear_output(wait=True)
         generate_and_save_images(generator,
@@ -88,8 +91,6 @@ def train(dataset, epochs, savedir):
     # save IS score and Loss plot
     IS_mean = np.array(IS_mean)
     IS_std = np.array(IS_std)
-    G_loss = np.array(G_loss)
-    D_loss = np.array(D_loss)
     IS_df = pd.DataFrame({'mean':IS_mean, 'mean+std':IS_mean+IS_std, 'mean-std':IS_mean-IS_std, 'std':IS_std})
     IS_df.index = [5 * (x + 1) for x in range(IS_df.shape[0])]
     Loss_df = pd.DataFrame({'Generater':G_loss, 'Discriminator':D_loss})
