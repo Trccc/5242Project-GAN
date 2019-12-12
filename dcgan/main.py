@@ -88,6 +88,8 @@ def train(dataset, epochs, savedir):
     # save IS score and Loss plot
     IS_mean = np.array(IS_mean)
     IS_std = np.array(IS_std)
+    G_loss = np.array(G_loss)
+    D_loss = np.array(D_loss)
     IS_df = pd.DataFrame({'mean':IS_mean, 'mean+std':IS_mean+IS_std, 'mean-std':IS_mean-IS_std, 'std':IS_std})
     IS_df.index = [5 * (x + 1) for x in range(IS_df.shape[0])]
     Loss_df = pd.DataFrame({'Generater':G_loss, 'Discriminator':D_loss})
