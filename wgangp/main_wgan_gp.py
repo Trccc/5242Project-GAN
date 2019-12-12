@@ -67,7 +67,7 @@ def train_step(images):
         
         weights = K.random_uniform([BATCH_SIZE, 1, 1, 1])
         averaged_samples = generated_images + weights * (images - generated_images)
-        averaged_samples_output = discriminator(averaged_samples, training=False)
+        averaged_samples_output = discriminator(averaged_samples, training=True)
 
         gen_loss = generator_loss(fake_output)
         disc_loss = discriminator_loss(real_output, fake_output, averaged_samples_output, averaged_samples, gradient_penalty_weight)
