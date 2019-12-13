@@ -18,8 +18,10 @@ from config import cfg
 
 
 def discriminator_loss(real_output, fake_output):
-    real_loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)(tf.ones_like(real_output), real_output)
-    fake_loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)(tf.zeros_like(fake_output), fake_output)
+    if tf.random.uniform([1]) < 0.05:
+        real_output, fake_output = fake_output, real_output
+    real_loss = tf.keras.losses.BinaryCrossentropy(label_smoothing=0.1, from_logits=True)(tf.ones_like(real_output), real_output)
+    fake_loss = tf.keras.losses.BinaryCrossentropy(label_smoothing=0.1, from_logits=True)(tf.zeros_like(fake_output), fake_output)
     total_loss = real_loss + fake_loss
     return total_loss
 
