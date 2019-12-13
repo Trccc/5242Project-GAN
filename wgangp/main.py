@@ -24,8 +24,8 @@ import pandas as pd
 def train_step(images, showloss = False):
     noise = tf.random.normal([cfg.BATCH_SIZE, cfg.NOISE_DIM])
     
-    g_loss = generator_loss
-    d_loss = discriminator_loss
+    g_loss = gp_generator_loss
+    d_loss = gp_discriminator_loss
         
     with tf.GradientTape() as gen_tape, tf.GradientTape() as disc_tape:
         generated_images = generator(noise, training=True)
@@ -37,8 +37,8 @@ def train_step(images, showloss = False):
         averaged_samples = generated_images + weights * (images - generated_images)
         averaged_samples_output = discriminator(averaged_samples, training=True)
 
-        gen_loss = gp_generator_loss(fake_output)
-        disc_loss = gp_discriminator_loss(real_output, fake_output, averaged_samples_output, averaged_samples, cfg.GRADIENT_PENALTY_WEIGHT)
+        gen_loss = g_loss(fake_output)
+        disc_loss = d_loss(real_output, fake_output, averaged_samples_output, averaged_samples, cfg.GRADIENT_PENALTY_WEIGHT)
         
         #if showloss:
             #print('gen_loss = %.4f|disc_loss = %.4f'%(gen_loss.numpy(),disc_loss.numpy()))
@@ -136,7 +136,7 @@ if __name__ == '__main__':
         
         train_data = get_train_data('svhn')
         generator = make_generator_model_svhn()
-        discriminator = make_discriminator_model_svhn_p()
+        discriminator = make_discriminator_model_svhn_p_no_bn()
     
     noise = tf.random.normal([1, 100])
     
@@ -178,7 +178,7 @@ if __name__ == '__main__':
                            
     savedir = filedir
           
-    train(train_data, EPOCHS,savedir)
+    train(train_data, EPOCHS, savedir)
     
     if cfg.GIF:
         anim_file = subfile+'gan.gif'
