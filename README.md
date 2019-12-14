@@ -39,7 +39,15 @@ SVHN
 MNIST  
 ![mnist](mnist.gif)
 
-## reference
+## To Run
+
+To run a certain model  
+Modify the global variables in config.py then
+```
+python main.py 
+```
+
+## Reference
 
 [Inception Score](https://arxiv.org/abs/1606.03498)  
 
