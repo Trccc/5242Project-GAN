@@ -57,7 +57,7 @@ def get_train_data(name = 'svhn'):
     elif name.lower() =='mnist':
         
         (train_images, train_labels), (_, _) = tf.keras.datasets.mnist.load_data()
-        train_images = train_images.reshape(train_images.shape[0], cfg.IMG_SIZE, cfg.IMG_SIZE, 1).astype('float32')
+        train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype('float32')
         train_images = (train_images - 127.5) / 127.5
         train_images = tf.data.Dataset.from_tensor_slices(train_images).shuffle(cfg.BUFFER_SIZE).batch(cfg.BATCH_SIZE)
         return train_images

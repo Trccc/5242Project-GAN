@@ -137,20 +137,12 @@ if __name__ == '__main__':
         
         train_data = get_train_data('svhn')
         generator = make_generator_model_svhn()
-        discriminator = make_discriminator_model_svhn_p()
+        discriminator = make_discriminator_model_svhn()
     
     noise = tf.random.normal([1, 100])
     
     generator_optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-4, beta_1 = 0.5)
     discriminator_optimizer = tf.keras.optimizers.Adam(learning_rate =1e-4, beta_1 = 0.5)
-
-    
-#     checkpoint_dir = cfg.CHECK_DIR
-#     checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
-#     checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
-#                                      discriminator_optimizer=discriminator_optimizer,
-#                                      generator=generator,
-#                                      discriminator=discriminator)
     
     EPOCHS = cfg.EPOCHS
     noise_dim = cfg.NOISE_DIM
