@@ -15,10 +15,9 @@ Yusang Mao ym2694
 
 ## Tasks
 
-Implement Inception score -- 李宏毅 [Lecture 10](https://www.youtube.com/watch?v=IB_ADssBomk&list=PLJV_el3uVTsMq6JEFPW35BCiOQTsoqwNw&index=10)  
-[Keras Implementation](https://machinelearningmastery.com/how-to-implement-the-inception-score-from-scratch-for-evaluating-generated-images/)
+Implement Inception score
 
-Try different architectures.
+Try different architectures
 
 Try GAN on SVHN data
 
@@ -28,19 +27,23 @@ DCGAN
 FCCGAN  
 WGAN   
 - clip wgan-clip  
-- gradient penalty wgan-gp   
+- gradient penalty wgan-gp  
+
 Spectrual Normalization   
 
 ## Results
 
-
+SVHN  
 ![svhn](svhn.gif)
 
+MNIST  
 ![mnist](mnist.gif)
 
 ## reference
 
-[Inception Score](https://arxiv.org/abs/1606.03498) 
+[Inception Score](https://arxiv.org/abs/1606.03498)  
+
+[FCCGAN](https://arxiv.org/abs/1905.02417)  
 
 [WGAN](https://arxiv.org/abs/1701.07875)
 
