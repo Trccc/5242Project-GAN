@@ -33,7 +33,7 @@ Yusang Mao ym2694
 ## Results
 
 SVHN  
-![svhn](svhn.gif)
+![svhn](SVHN.gif)
 
 MNIST  
 ![mnist](mnist.gif)
