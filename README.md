@@ -15,21 +15,21 @@ Yusang Mao ym2694
 
 ## Tasks
 
-Implement Inception score
+1. Implement Inception score
 
-Try different architectures
+2. Try different architectures
 
-Try GAN on SVHN data
+3. Try GAN on SVHN data
 
-Implement different kinds of GAN  
+4. Implement different kinds of GAN  
 
-DCGAN  
-FCCGAN  
-WGAN   
-- clip wgan-clip  
-- gradient penalty wgan-gp  
+   - DCGAN  
+   - FCCGAN  
+   - WGAN   
+     - clip wgan-clip  
+     - gradient penalty wgan-gp  
 
-Spectrual Normalization   
+   - Spectrual Normalization   
 
 ## Results
 
