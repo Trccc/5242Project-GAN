@@ -30,8 +30,8 @@ Yusang Mao ym2694
    - DCGAN  
    - FCCGAN  
    - WGAN   
-     - clip wgan-CLIP  
-     - gradient penalty wgan-GP  
+     - clip WGAN-CLIP  
+     - gradient penalty WGAN-GP  
 
    - Spectrual Normalization   
 
