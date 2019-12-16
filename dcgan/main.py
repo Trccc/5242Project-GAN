@@ -84,8 +84,14 @@ def train(dataset, epochs, savedir):
             IS_mean.append(mean)
             IS_std.append(std)
             checkpoint.save(file_prefix = checkpoint_prefix)
+        
+        with train_summary_writer.as_default():
+            tf.summary.scalar('loss', G_loss[-1], step=epoch)
+        with test_summary_writer.as_default():
+            tf.summary.scalar('loss', D_loss[-1], step=epoch) 
         print ('Time for epoch {} is {} sec'.format(epoch + 1, time.time()-start))
     # clear outputs
+   
     display.clear_output(wait=True)
     
     # save IS score and Loss plot
@@ -93,7 +99,7 @@ def train(dataset, epochs, savedir):
     IS_std = np.array(IS_std)
     IS_df = pd.DataFrame({'mean':IS_mean, 'mean+std':IS_mean+IS_std, 'mean-std':IS_mean-IS_std, 'std':IS_std})
     IS_df.index = [5 * (x + 1) for x in range(IS_df.shape[0])]
-    Loss_df = pd.DataFrame({'Generater':G_loss, 'Discriminator':D_loss})
+    Loss_df = pd.DataFrame({'Generator':G_loss, 'Discriminator':D_loss})
     
     df_path = os.path.join(savedir, 'IS_score.csv')
     IS_df.to_csv(path_or_buf=df_path, index=False)
@@ -104,7 +110,7 @@ def train(dataset, epochs, savedir):
     path = os.path.join(savedir, 'IS_score_trend.png')
     fig = plt.figure(figsize=(6, 6))
     plt.plot(IS_df[['mean','mean+std','mean-std']])
-    plt.title('Inception Scores')
+    plt.title('Inception Score')
     plt.legend(IS_df[['mean','mean+std','mean-std']].columns, loc='best')
     plt.savefig(path)
     #plt.close('all')
@@ -126,7 +132,7 @@ def train(dataset, epochs, savedir):
     
 
 if __name__ == '__main__':
-    
+
     if cfg.DATA.lower() == 'mnist':
 
         train_data = get_train_data('mnist')
@@ -137,20 +143,13 @@ if __name__ == '__main__':
         
         train_data = get_train_data('svhn')
         generator = make_generator_model_svhn()
-        discriminator = make_discriminator_model_svhn_p()
+        discriminator = make_discriminator_model_svhn()
     
     noise = tf.random.normal([1, 100])
     
-    generator_optimizer = tf.keras.optimizers.Adam(learning_rate = 1e-4, beta_1 = 0.5)
-    discriminator_optimizer = tf.keras.optimizers.Adam(learning_rate =1e-4, beta_1 = 0.5)
+    generator_optimizer = tf.keras.optimizers.Adam(learning_rate=1e-4, beta_1=0.5)
+    discriminator_optimizer = tf.keras.optimizers.Adam(learning_rate=1e-4, beta_1=0.5)
 
-    
-#     checkpoint_dir = cfg.CHECK_DIR
-#     checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
-#     checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
-#                                      discriminator_optimizer=discriminator_optimizer,
-#                                      generator=generator,
-#                                      discriminator=discriminator)
     
     EPOCHS = cfg.EPOCHS
     noise_dim = cfg.NOISE_DIM
@@ -178,7 +177,13 @@ if __name__ == '__main__':
         os.mkdir(filedir)
                            
     savedir = filedir
-          
+    
+    current_time = datetime.now().strftime("%Y%m%d-%H%M%S")
+    gen_log_dir = 'logs/gradient_tape/' + current_time + '/gen'
+    disc_log_dir = 'logs/gradient_tape/' + current_time + '/disc'
+    train_summary_writer = tf.summary.create_file_writer(gen_log_dir)
+    test_summary_writer = tf.summary.create_file_writer(disc_log_dir)
+    
     train(train_data, EPOCHS,savedir)
     
     if cfg.GIF:
