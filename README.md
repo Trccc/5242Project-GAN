@@ -1,8 +1,8 @@
 # 5242Project
 
-Final Project for 5242 Advanced Machine Learning  
+Final Project for GR 5242 Advanced Machine Learning  
 
-This is the github for the whole project results.
+This is the github for the complete project results.
 
 The majority of work is done on the Google Cloud Platform by running scripts on Nvidia Tesla P100 GPU due to the limitation of notebooks.
 
