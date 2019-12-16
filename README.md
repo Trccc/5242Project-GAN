@@ -1,43 +1,68 @@
 # 5242Project
 
 Final Project for 5242 Advanced Machine Learning  
-![funny](funny.gif)
+
+This is the github for the whole project results.
+
+The majority of work is done on the Google Cloud Platform by running scripts on Nvidia Tesla P100 GPU due to the limitation of notebooks.
+
+## Dependency
+
+Tensorflow 2.0
 
 ## Members
 
-Chirong Zhang cz2533
-
-Zhichao Liu zl2686
-
-Yunxiao Zhao yz3380
-
-Yusang Mao ym2694
+Chirong Zhang cz2533  
+Yunxiao Zhao yz3380    
+Zhichao Liu zl2686  
+Yusang Mao ym2694  
 
 ## Tasks
 
-Inception score -- 李宏毅 [Lecture 10](https://www.youtube.com/watch?v=IB_ADssBomk&list=PLJV_el3uVTsMq6JEFPW35BCiOQTsoqwNw&index=10)  
-[Keras Implementation](https://machinelearningmastery.com/how-to-implement-the-inception-score-from-scratch-for-evaluating-generated-images/)
+1. Implement Inception score
 
-Change CNN architecture.
+2. Try different architectures
 
-Try original GAN on SVHN data
+3. Try GAN on SVHN data
 
-reference[blog](https://wiseodd.github.io/techblog/2017/02/04/wasserstein-gan/?nsukey=LKALNIt1JkY2XrdT3fIBlKyQGMaD93R%2BvZofl8M9SJY4JnDH%2FZ3%2FdeZMlbVlh%2ByoJ1QBGzsG5rKTKxul4Rf7pG7Pbe2yzuCQbiRym%2FHAZN8aBc4WWOOcmGwQwYHAHFyWeLfq4%2B%2FaaEyVrzKIXtrxwHggMcT0hwrEx4jHLE014qX0pxO%2FI%2Fc9umB%2Fy4j1JuMjVYswlw8%2FrpJKCxJWClp7Tg%3D%3D)
+4. Implement different kinds of GAN  
 
-Implement WGAN[Lecture 6](https://www.youtube.com/watch?v=3JP-xuBJsyc&list=PLJV_el3uVTsMq6JEFPW35BCiOQTsoqwNw&index=6)
-- clip [Keras Implementation](https://github.com/eriklindernoren/Keras-GAN/blob/master/wgan/wgan.py)   
-- gradient penalty wgan-gp [Keras Implementation](https://github.com/eriklindernoren/Keras-GAN/blob/master/wgan_gp/wgan_gp.py)  
-Spectrual Normalization [Keras Implementation](https://github.com/IShengFang/SpectralNormalizationKeras)
+   - DCGAN  
+   - FCCGAN  
+   - WGAN   
+     - clip WGAN-CLIP  
+     - gradient penalty WGAN-GP  
 
-## Challenge encountered
-
-momentum 0.5
+   - Spectrual Normalization   
 
 ## Results
 
+SVHN  
+![svhn](SVHN.gif)
 
-![svhn](svhn.gif)
-
+MNIST  
 ![mnist](mnist.gif)
 
-## reference
+## To Run
+
+To run a certain model  
+Modify the global variables in config.py then
+```
+python main.py 
+```
+
+## Reference
+
+[Inception Score](https://arxiv.org/abs/1606.03498)  
+
+[FCCGAN](https://arxiv.org/abs/1905.02417)  
+
+[WGAN](https://arxiv.org/abs/1701.07875)
+
+[WGAN-GP](https://arxiv.org/abs/1704.00028)
+
+[Spectral Normalization](https://arxiv.org/abs/1802.05957)
+
+## Acknowledge
+
+The main training process code is modified from [DCGAN tensorflow tutorial](https://www.tensorflow.org/tutorials/generative/dcgan).
