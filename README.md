@@ -30,8 +30,8 @@ Yusang Mao ym2694
    - DCGAN  
    - FCCGAN  
    - WGAN   
-     - clip wgan-clip  
-     - gradient penalty wgan-gp  
+     - clip wgan-CLIP  
+     - gradient penalty wgan-GP  
 
    - Spectrual Normalization   
 
@@ -59,7 +59,7 @@ python main.py
 
 [WGAN](https://arxiv.org/abs/1701.07875)
 
-[WGAN-gp](https://arxiv.org/abs/1704.00028)
+[WGAN-GP](https://arxiv.org/abs/1704.00028)
 
 [Spectral Normalization](https://arxiv.org/abs/1802.05957)
 
