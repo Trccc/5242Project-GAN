@@ -37,11 +37,7 @@ Yusang Mao, ym2694
 
 ## Results
 
-SVHN  
-![svhn](SVHN.gif)
-
-MNIST  
-![mnist](mnist.gif)
+ ![mnist](mnist.gif ) ![svhn](SVHN.gif "SVHN")   
 
 ## To Run
 
