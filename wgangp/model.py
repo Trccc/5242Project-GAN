@@ -108,32 +108,3 @@ def make_discriminator_model_svhn_p():
     model.add(layers.Dense(1))
 
     return model
-
-def make_discriminator_model_svhn():
-    model = tf.keras.Sequential()
-    model.add(layers.Conv2D(64, (4, 4), strides=(2, 2), padding='same',
-                                     input_shape=[32, 32, 3]))
-    model.add(layers.BatchNormalization())
-    model.add(layers.LeakyReLU(0.2))
-#     model.add(layers.Dropout(0.3))
-
-    model.add(layers.Conv2D(128, (4, 4), strides=(2, 2)))
-    model.add(layers.BatchNormalization())
-    model.add(layers.LeakyReLU(0.2))
-#     model.add(layers.Dropout(0.3))
-
-    model.add(layers.Conv2D(256, (4, 4), strides=(2, 2)))
-    model.add(layers.BatchNormalization())
-    model.add(layers.LeakyReLU(0.2))
-#     model.add(layers.Dropout(0.3))   
-
-    model.add(layers.Flatten())
-    model.add(layers.Dense(512, use_bias=False))
-    model.add(layers.LeakyReLU(0.2))
-    model.add(layers.Dense(64, use_bias=False))
-    model.add(layers.LeakyReLU(0.2))
-    model.add(layers.Dense(16, use_bias=False))
-    model.add(layers.LeakyReLU(0.2))
-    model.add(layers.Dense(1))
-
-    return model
