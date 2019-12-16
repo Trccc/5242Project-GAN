@@ -78,7 +78,6 @@ def train(dataset, epochs, savedir):
                                  epoch + 1,
                                  seed,savedir)
         
-        # Save the model every 15 epochs
         if (epoch + 1) % 5 == 0:
             mean, std = IS(generator, 1000, 100)
             IS_mean.append(mean)
