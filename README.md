@@ -12,26 +12,26 @@ Tensorflow 2.0
 
 ## Members
 
-Chirong Zhang cz2533  
-Yunxiao Zhao yz3380    
-Zhichao Liu zl2686  
-Yusang Mao ym2694  
+Chirong Zhang, cz2533  
+Yunxiao Zhao, yz3380    
+Zhichao Liu, zl2686  
+Yusang Mao, ym2694  
 
 ## Tasks
 
-1. Implement Inception score
+1. Implement the Inception Score
 
-2. Try different architectures
+2. Try GANs on MNIST data
 
-3. Try GAN on SVHN data
+3. Try GANs on SVHN data
 
-4. Implement different kinds of GAN  
+4. Implement different architecture of GANs  
 
    - DCGAN  
    - FCCGAN  
    - WGAN   
-     - clip WGAN-CLIP  
-     - gradient penalty WGAN-GP  
+     - Clip, WGAN-CLIP  
+     - Gradient penalty, WGAN-GP  
 
    - Spectrual Normalization   
 
